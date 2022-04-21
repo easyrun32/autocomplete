@@ -3,12 +3,10 @@ import TextField from '@mui/material/TextField';
 import { useForm, Controller } from 'react-hook-form';
 import './App.css';
 import React from 'react';
-import InputMask from 'react-input-mask';
+
+import { countriesOptions } from './countries';
 // Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
-const top100Films = [
-  { label: 'Canada', value: 'CA' },
-  { label: 'United States', value: 'US' },
-];
+
 export const countries = [
   { code: 'AD', label: 'Andorra', phone: '376' },
   { code: 'AE', label: 'United Arab Emirates', phone: '971' },
@@ -25,15 +23,10 @@ function countryToFlag(isoCode) {
 function App() {
   const { register, watch, handleSubmit, control, getValues } = useForm();
   const defaultProps = {
-    options: top100Films,
+    options: countriesOptions,
     getOptionLabel: (option) => option.label,
   };
-  const getOpObj = (option) => {
-    if (!option._id) option = countries.find((op) => op._id === option);
-    return option;
-  };
   console.log('watch', watch());
-
   return (
     <div className="App">
       <div className="select">
@@ -52,7 +45,7 @@ function App() {
                 autoHighlight
                 onInputChange={(event, newInputValue) => {
                   if (newInputValue.length > 0) {
-                    const autoSelect = top100Films.find(
+                    const autoSelect = countriesOptions.find(
                       (e, i) => e.value === newInputValue
                     );
                     if (autoSelect) {
@@ -67,8 +60,15 @@ function App() {
                   return (
                     <TextField
                       {...params}
-                      label={value ? value.value : 'country'}
+                      label={
+                        value
+                          ? countriesOptions.find(
+                              (e, i) => e.value === value.value
+                            ).label
+                          : 'country'
+                      }
                       placeholder="country"
+                      variant="outlined"
                     />
                   );
                 }}
@@ -80,7 +80,7 @@ function App() {
           }}
         />
 
-        <div style={{ marginTop: '200px' }}>
+        <div style={{ marginTop: '600px' }}>
           {JSON.stringify(getValues('country'))}
         </div>
       </div>
