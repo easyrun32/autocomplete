@@ -3,25 +3,48 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #282c34;
+  background-color: #f6fafc;
   min-height: 100vh;
   color: white;
 }
 
 .mui-input {
-  background-color: red;
-  padding: 20px;
+  /* background-color: red; */
+  padding: 15px;
+  border-width: 1px;
+  border-radius: 0.25rem;
+  outline: none;
+
+  width: 100%;
+  color: black;
+  font-size: 15px;
+  margin-bottom: 0px;
+  border: none;
+  border-color: transparent;
 }
+
+.mui-input:-webkit-autofill,
+.mui-input:-webkit-autofill:hover,
+.mui-input:-webkit-autofill:focus {
+  /* color: white;
+  -webkit-text-fill-color: white; */
+  /* border: 1px solid green;
+  -webkit-text-fill-color: green;
+  -webkit-box-shadow: 0 0 0px 1000px #000 inset; */
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 .mui-label {
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: green;
+  left: 10%;
+  transform: translate(-10%, -50%);
+  color: black;
 }
 .mui-container {
+  /* border-radius: 10px; */
   position: relative;
-  background-color: gray;
+  /* background-color: gray; */
   width: 300px;
 }
 

@@ -24,7 +24,9 @@ function countryToFlag(isoCode) {
 function App() {
   const { register, watch, handleSubmit, control, getValues } = useForm();
   const [openMenu, setOpenMenu] = useState(false);
-  const [auto, setAuto] = useState(false);
+
+  const [input, setInput] = useState('');
+
   const defaultProps = {
     options: countriesOptions,
     getOptionLabel: (option) => option.label,
@@ -53,18 +55,12 @@ function App() {
                 onInputChange={(event, newInputValue) => {
                   if (newInputValue.length > 0) {
                     const autoSelect = countriesOptions.find(
-                      (e, i) =>
-                        e.value === newInputValue || e.label === newInputValue
+                      (e, i) => e.value === newInputValue
                     );
-
                     if (autoSelect) {
                       onChange(autoSelect);
+                      setInput(autoSelect.label);
                     }
-                  }
-                  if (newInputValue.length === 0) {
-                    setAuto(true);
-                  } else {
-                    setAuto(false);
                   }
                 }}
                 renderInput={(params) => {
@@ -83,22 +79,24 @@ function App() {
                         setOpenMenu(true);
                       }}
                     >
-                      {auto && (
-                        <label {...params.InputLabelProps}>
-                          {value
-                            ? countriesOptions.find(
-                                (e, i) => e.value === value.value
-                              ).label
-                            : 'country'}
-                        </label>
-                      )}
-                      <input {...params.inputProps} autoFocus />
+                      <input
+                        {...params.inputProps}
+                        autoFocus
+                        value={input}
+                        onInput={(e) => {
+                          setInput(e.target.value);
+                        }}
+                      />
                     </div>
                   );
                 }}
+                // if something changes upon select
                 onChange={(_, data) => {
                   setOpenMenu(false);
                   onChange(data);
+                  if (data) {
+                    setInput(data.label);
+                  }
                 }}
               />
             );
