@@ -1,7 +1,16 @@
 .App {
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #282c34;
+  min-height: 100vh;
+  color: white;
 }
-
+.select {
+  width: 500px;
+  color: white;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
