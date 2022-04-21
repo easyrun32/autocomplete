@@ -7,9 +7,31 @@
   min-height: 100vh;
   color: white;
 }
+
+.mui-input {
+  background-color: red;
+  padding: 20px;
+}
+.mui-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: green;
+}
+.mui-container {
+  position: relative;
+  background-color: gray;
+  width: 300px;
+}
+
 .select {
   width: 500px;
-  color: white;
+  /* background-color: #61dafb; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .App-logo {
   height: 40vmin;

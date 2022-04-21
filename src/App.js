@@ -2,7 +2,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { useForm, Controller } from 'react-hook-form';
 import './App.css';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { countriesOptions } from './countries';
 // Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
@@ -20,13 +20,16 @@ function countryToFlag(isoCode) {
         )
     : isoCode;
 }
+
 function App() {
   const { register, watch, handleSubmit, control, getValues } = useForm();
+  const [openMenu, setOpenMenu] = useState(false);
+  const [auto, setAuto] = useState(false);
   const defaultProps = {
     options: countriesOptions,
     getOptionLabel: (option) => option.label,
   };
-  console.log('watch', watch());
+
   return (
     <div className="App">
       <div className="select">
@@ -37,10 +40,14 @@ function App() {
           render={({ field: { onChange, value } }) => {
             return (
               <Autocomplete
+                open={openMenu}
                 type={'country'}
                 label="Country"
                 id="country"
                 {...defaultProps}
+                onClose={() => {
+                  setOpenMenu(false);
+                }}
                 autoSelect
                 autoHighlight
                 onInputChange={(event, newInputValue) => {
@@ -52,27 +59,43 @@ function App() {
                       onChange(autoSelect);
                     }
                   }
+                  if (newInputValue.length === 0) {
+                    setAuto(true);
+                  } else {
+                    setAuto(false);
+                  }
                 }}
                 renderInput={(params) => {
+                  //Input css and attributes
                   const inputProps = params.inputProps;
                   inputProps.autoComplete = 'country';
-
+                  inputProps.className = 'mui-input';
+                  //label css and attributes
+                  const inputLabel = params.InputLabelProps;
+                  inputLabel.className = 'mui-label';
                   return (
-                    <TextField
-                      {...params}
-                      label={
-                        value
-                          ? countriesOptions.find(
-                              (e, i) => e.value === value.value
-                            ).label
-                          : 'country'
-                      }
-                      placeholder="country"
-                      variant="outlined"
-                    />
+                    <div
+                      ref={params.InputProps.ref}
+                      className="mui-container"
+                      onClick={() => {
+                        setOpenMenu(true);
+                      }}
+                    >
+                      {auto && (
+                        <label {...params.InputLabelProps}>
+                          {value
+                            ? countriesOptions.find(
+                                (e, i) => e.value === value.value
+                              ).label
+                            : 'country'}
+                        </label>
+                      )}
+                      <input {...params.inputProps} autoFocus />
+                    </div>
                   );
                 }}
                 onChange={(_, data) => {
+                  setOpenMenu(false);
                   onChange(data);
                 }}
               />
@@ -83,6 +106,13 @@ function App() {
         <div style={{ marginTop: '600px' }}>
           {JSON.stringify(getValues('country'))}
         </div>
+        <button
+          onClick={() => {
+            console.log('BUTTON', getValues('country'));
+          }}
+        >
+          what is it
+        </button>
       </div>
     </div>
   );
@@ -109,4 +139,22 @@ function App() {
                 }}
               />
 */
+
+/*
+                      <TextField
+                        onClick={() => {
+                          setOpenMenu(true);
+                        }}
+                        {...params}
+                        label={
+                          value
+                            ? countriesOptions.find(
+                                (e, i) => e.value === value.value
+                              ).label
+                            : 'country'
+                        }
+                        placeholder="country"
+                        variant="outlined"
+                      />
+                    */
 export default App;
