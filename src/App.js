@@ -24,7 +24,7 @@ function App() {
   const { register, watch, handleSubmit, control, getValues } = useForm();
   const [openMenu, setOpenMenu] = useState(false);
 
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState('Select Country');
 
   const defaultProps = {
     options: countriesOptions,
@@ -86,6 +86,7 @@ function App() {
                           setInput(e.target.value);
                         }}
                       />
+                      <div className="right"></div>
                     </div>
                   );
                 }}

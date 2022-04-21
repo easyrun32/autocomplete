@@ -7,20 +7,43 @@
   min-height: 100vh;
   color: white;
 }
+.mui-label {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  transform: translate(-10%, -50%);
+  color: black;
+}
+.mui-container {
+  /* border-radius: 10px; */
+  position: relative;
+  border: 1px solid #e5e7eb;
+  border-radius: 5px;
+  /* background-color: yellow; */
+  width: 300px;
+  display: flex;
+}
 
 .mui-input {
   /* background-color: red; */
   padding: 15px;
+  border-radius: 5px;
   border-width: 1px;
   border-radius: 0.25rem;
   outline: none;
+  flex: 1;
 
-  width: 100%;
+  /* width: 100%; */
   color: black;
   font-size: 15px;
   margin-bottom: 0px;
-  border: none;
+
   border-color: transparent;
+}
+.right {
+  width: 30px;
+  flex: 0.2;
+  /* background-color: gray; */
 }
 
 .mui-input:-webkit-autofill,
@@ -32,20 +55,6 @@
   -webkit-text-fill-color: green;
   -webkit-box-shadow: 0 0 0px 1000px #000 inset; */
   transition: background-color 5000s ease-in-out 0s;
-}
-
-.mui-label {
-  position: absolute;
-  top: 50%;
-  left: 10%;
-  transform: translate(-10%, -50%);
-  color: black;
-}
-.mui-container {
-  /* border-radius: 10px; */
-  position: relative;
-  /* background-color: gray; */
-  width: 300px;
 }
 
 .select {
