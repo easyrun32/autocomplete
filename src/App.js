@@ -53,8 +53,10 @@ function App() {
                 onInputChange={(event, newInputValue) => {
                   if (newInputValue.length > 0) {
                     const autoSelect = countriesOptions.find(
-                      (e, i) => e.value === newInputValue
+                      (e, i) =>
+                        e.value === newInputValue || e.label === newInputValue
                     );
+
                     if (autoSelect) {
                       onChange(autoSelect);
                     }
