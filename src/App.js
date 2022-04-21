@@ -5,7 +5,6 @@ import './App.css';
 import React, { useEffect, useRef, useState } from 'react';
 
 import { countriesOptions } from './countries';
-// Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
 
 export const countries = [
   { code: 'AD', label: 'Andorra', phone: '376' },
@@ -55,7 +54,8 @@ function App() {
                 onInputChange={(event, newInputValue) => {
                   if (newInputValue.length > 0) {
                     const autoSelect = countriesOptions.find(
-                      (e, i) => e.value === newInputValue
+                      (e, i) =>
+                        e.value === newInputValue || e.label === newInputValue
                     );
                     if (autoSelect) {
                       onChange(autoSelect);
@@ -117,44 +117,5 @@ function App() {
     </div>
   );
 }
-/*
-  <Autocomplete
-                type={'country'}
-                label="Country"
-                id="country"
-                {...defaultProps}
-                autoSelect
-                onInputChange={(event, newInputValue) => {}}
-                renderInput={(params) => {
-                  const inputProps = params.inputProps;
-                  inputProps.autoComplete = 'country';
-                  return (
-                    <TextField
-                      {...params}
-                      label="country"
-                      variant="standard"
-                      placeholder="country"
-                    />
-                  );
-                }}
-              />
-*/
 
-/*
-                      <TextField
-                        onClick={() => {
-                          setOpenMenu(true);
-                        }}
-                        {...params}
-                        label={
-                          value
-                            ? countriesOptions.find(
-                                (e, i) => e.value === value.value
-                              ).label
-                            : 'country'
-                        }
-                        placeholder="country"
-                        variant="outlined"
-                      />
-                    */
 export default App;
